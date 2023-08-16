@@ -5,17 +5,32 @@ socket.on('connect', function () {
 });
 
 socket.on('receive_message', function (data) {
-    var messageDiv = document.createElement('div');
-    messageDiv.innerText = '[' + data.username + '] ' + data.content;
-    document.getElementById('messages').appendChild(messageDiv);
+    if(username==data.username){
+        displayMessage(username, data.content, true); // Pass `true` for sent messages
+    }
+    else{
+        displayMessage(data.username, data.content, false);
+    }
 });
-alert(username)
+
 function sendMessage() {
     var content = document.getElementById('messageInput').value;
-     // You can set the username here
-
     socket.emit('send_message', { content, username });
-
-    // Clear the input field
     document.getElementById('messageInput').value = '';
+}
+
+function displayMessage(sender, content, isSent) {
+    var messageDiv = document.createElement('div');
+    messageDiv.innerText = content;
+    messageDiv.classList.add('message');
+
+    if (isSent) {
+        messageDiv.classList.add('sender-message');
+    } else {
+        messageDiv.classList.add('receiver-message');
+    }
+
+    var messagesContainer = document.getElementById('messages');
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to bottom
 }
