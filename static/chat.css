@@ -11,7 +11,7 @@ body {
     height: 90vh;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #adadad;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -36,8 +36,7 @@ body {
 }
 
 .sender-message {
-    background-color: #3498db;
-    color: #ffffff;
+    background-color: white;
     display: inline-block;
     align-self: flex-end;
     max-width: 50%;
@@ -45,7 +44,7 @@ body {
     
 .receiver-message {
     background-color: #f2f2f2;
-    color: #333333;
+    color: white;
     display: inline-block;
     align-self: flex-start;
     max-width: 50%;
@@ -80,9 +79,20 @@ button:hover {
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
     #chat-container {
-        max-width: 90%;
+        max-width: 85%;
     }
     #messages {
-        max-height: 40vh; /* Adjust the max height for smaller screens */
+        max-height: 90vh; /* Adjust the max height for smaller screens */
     }
+}
+
+
+.username {
+    font-weight: lighter;
+    margin-bottom: 4px;
+}
+
+.content {
+    color: black;
+    margin-top: 4px;
 }

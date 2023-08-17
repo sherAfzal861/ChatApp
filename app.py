@@ -10,7 +10,7 @@ def index():
         user = Users.query.filter_by(email=email, password=password).first()
 
         if user:
-            return redirect(url_for('chat', username=user.first_name))
+            return redirect(url_for('chat', username=user.first_name+user.last_name))
         else:
             message = "User not present. Please check your email or sign up."
             return render_template('login.html', message=message)
@@ -28,7 +28,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         
-        return redirect(url_for('chat', username= first_name))  # Redirect to login page after successful signup
+        return redirect(url_for('chat', username= first_name+last_name))  # Redirect to login page after successful signup
     
     return render_template('signup.html')
 
@@ -44,5 +44,5 @@ def handle_message(data):
     emit('receive_message', {'content': content, 'username': username}, broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port="5000", debug=True)
+    socketio.run(app,debug=True)
 

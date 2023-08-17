@@ -19,10 +19,35 @@ function sendMessage() {
     document.getElementById('messageInput').value = '';
 }
 
+const userColors = {};
+
+function getRandomColor(username) {
+    if (userColors[username]) {
+        return userColors[username];
+    } else {
+        const colors = ['#ff5733', '#33ff6c', '#336bff', '#b733ff', '#ff33e2']; // Add more colors as needed
+        const randomIndex = Math.floor(Math.random() * colors.length);
+        const color = colors[randomIndex];
+        userColors[username] = color; // Store the color for the user
+        return color;
+    }
+}
+
 function displayMessage(sender, content, isSent) {
     var messageDiv = document.createElement('div');
-    messageDiv.innerText = content;
     messageDiv.classList.add('message');
+
+    var usernameDiv = document.createElement('div');
+    usernameDiv.innerText = sender;
+    usernameDiv.style.color = getRandomColor();
+    usernameDiv.classList.add('username');
+
+    var contentDiv = document.createElement('div');
+    contentDiv.innerText = content;
+    contentDiv.classList.add('content');
+
+    messageDiv.appendChild(usernameDiv);
+    messageDiv.appendChild(contentDiv);
 
     if (isSent) {
         messageDiv.classList.add('sender-message');
